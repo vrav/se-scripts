@@ -299,7 +299,6 @@ public Program() {
     /*
         Simple walk animation.
     */
-    
     float leg_angle = 45f;
     float leg_retract = 0.5f;
 
@@ -390,7 +389,7 @@ public void Main(string argument, UpdateType updateSource) {
         if( parts[part_name] == PartType.Rotor ) { // rotors
             if( robolegs.IsRotorAtValue( part_name, val ) ) {
                 float next = current_anim.frames[(current_frame + 1) % (current_anim.frames.Count)][part_name];
-                if( (val <= 0f && next > val) || (val >= 0f && next < val) ) {
+                if( (val < 0f && next > val) || (val > 0f && next < val) ) {
                     // reset velocity if we're reversing direction next frame
                     robolegs.GetRotorByName(part_name).part.TargetVelocityRad = 0f;
                 }
